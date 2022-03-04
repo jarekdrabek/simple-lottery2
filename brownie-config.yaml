@@ -2,6 +2,7 @@ contract:
   rinkeby:
     account_name: 'rinkeby-account1'
     address: '0xA7fEe2a153C32e28914226D1CC9CDa27FA9194a9'
+    winning_probability_in_promiles: 300
     dependencies:
       randomness:
         vrf_coordinator: '0x6168499c0cFfCaCD319c818142124B7A15E857ab'

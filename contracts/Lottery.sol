@@ -10,7 +10,7 @@ contract Lottery is VRFConsumerBaseV2 {
     VRFCoordinatorV2Interface COORDINATOR;
     bytes32 keyHash;
     uint64 subscriptionId;
-    uint64 winningProbabilityInPromiles = 500;
+    uint64 winningProbabilityInPromiles;
 
     enum LOTTERY_STATE {
         OPEN,
@@ -24,10 +24,11 @@ contract Lottery is VRFConsumerBaseV2 {
     uint256 public randomNumber;
     bool public isItWinningCoupon;
 
-    constructor(address _vrfCoordinator, bytes32 _keyHash, uint64 _subscriptionId) VRFConsumerBaseV2(_vrfCoordinator) {
+    constructor(address _vrfCoordinator, bytes32 _keyHash, uint64 _subscriptionId, uint64 _winningProbabilityInPromiles) VRFConsumerBaseV2(_vrfCoordinator) {
         COORDINATOR = VRFCoordinatorV2Interface(_vrfCoordinator);
         keyHash = _keyHash;
         subscriptionId = _subscriptionId;
+        winningProbabilityInPromiles = _winningProbabilityInPromiles;
     }
 
     modifier isCouponPrice() {

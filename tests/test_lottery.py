@@ -13,13 +13,13 @@ def test_lottery_workflow():
 
     #Act
     tx = lottery_contract.buyCouponAnTryToWin({"from": first_player_account, "value": Web3.toWei(0.001, 'ether')})
-    __fullfill_lottery_vrf_coordinator_with_given_random_result2(tx.return_value, lottery_contract, vrf_coordinator, 600)
+    __fullfill_lottery_vrf_coordinator_with_given_random_result2(tx.return_value, lottery_contract, vrf_coordinator, 14)
 
     tx = lottery_contract.buyCouponAnTryToWin({"from": second_player_account, "value": Web3.toWei(0.001, 'ether')})
-    __fullfill_lottery_vrf_coordinator_with_given_random_result2(tx.return_value, lottery_contract, vrf_coordinator, 900)
+    __fullfill_lottery_vrf_coordinator_with_given_random_result2(tx.return_value, lottery_contract, vrf_coordinator, 90)
 
     tx = lottery_contract.buyCouponAnTryToWin({"from": third_player_account, "value": Web3.toWei(0.001, 'ether')})
-    __fullfill_lottery_vrf_coordinator_with_given_random_result2(tx.return_value, lottery_contract, vrf_coordinator, 400)
+    __fullfill_lottery_vrf_coordinator_with_given_random_result2(tx.return_value, lottery_contract, vrf_coordinator, 4)
 
     #Assert
     assert lottery_contract.balance() == 0
@@ -48,10 +48,10 @@ def test_you_can_start_new_lottery_when_the_previous_one_was_finished():
 
     # Act
     tx = lottery_contract.buyCouponAnTryToWin({"from": first_player_account, "value": Web3.toWei(0.001, 'ether')})
-    __fullfill_lottery_vrf_coordinator_with_given_random_result2(tx.return_value, lottery_contract, vrf_coordinator, 400)
+    __fullfill_lottery_vrf_coordinator_with_given_random_result2(tx.return_value, lottery_contract, vrf_coordinator, 4)
 
     tx = lottery_contract.buyCouponAnTryToWin({"from": second_player_account, "value": Web3.toWei(0.001, 'ether')})
-    __fullfill_lottery_vrf_coordinator_with_given_random_result2(tx.return_value, lottery_contract, vrf_coordinator, 900)
+    __fullfill_lottery_vrf_coordinator_with_given_random_result2(tx.return_value, lottery_contract, vrf_coordinator, 90)
 
     #Assert
     assert lottery_contract.balance() == Web3.toWei(0.001, 'ether')
@@ -85,11 +85,13 @@ def __deploy_and_get_lottery_contract_and_dependencies(deploying_account):
 
     vrf_coordinator = VRFCoordinatorV2Mock.deploy(0, 0, {"from": deploying_account})
     subscription_id = vrf_coordinator.createSubscription().return_value
+    winning_probability_in_promiles = 10
 
     lottery_contract = Lottery.deploy(
         vrf_coordinator,
         keyhash,
         subscription_id,
+        winning_probability_in_promiles,
         {"from": deploying_account},
     )
     return lottery_contract, vrf_coordinator

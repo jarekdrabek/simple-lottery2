@@ -9,5 +9,10 @@ def get_config():
     subscription_id = config['contract'][working_network]['dependencies']['randomness']['subscription_id']
     return network, account, vrf_coordinator, keyhash, subscription_id
 
+
 def get_deployed_lottery_address():
     return config['contract'][network.show_active()]['address']
+
+
+def get_winning_probability_in_promiles():
+    return config['contract'][network.show_active()]['winning_probability_in_promiles']
