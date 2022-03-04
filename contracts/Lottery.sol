@@ -40,13 +40,13 @@ contract Lottery is VRFConsumerBaseV2 {
         _;
     }
 
-    function buyCouponAnTryToWin() public payable isCouponPrice {
+    function buyCouponAnTryToWin() public payable isCouponPrice returns(uint256) {
         require(lottery_state == LOTTERY_STATE.OPEN);
         lottery_state = LOTTERY_STATE.IN_PROGRESS;
-        tryToWin();
+        return tryToWin();
     }
 
-    function tryToWin() internal {
+    function tryToWin() internal returns(uint256) {
         uint16 requestConfirmations = 3;
         uint32 callbackGasLimit = 100000;
         uint32 numWords = 1;
@@ -58,6 +58,7 @@ contract Lottery is VRFConsumerBaseV2 {
             numWords
         );
         requestId2address[requestId] = msg.sender;
+        return requestId;
     }
 
     function fulfillRandomWords(uint256 requestId, uint256[] memory randomWords) internal override {
