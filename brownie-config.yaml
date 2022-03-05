@@ -1,7 +1,7 @@
 contract:
   rinkeby:
     account_name: 'rinkeby-account1'
-    address: '0xA7fEe2a153C32e28914226D1CC9CDa27FA9194a9'
+    address: '0xe7b2b1efbe5DF07afE89733e2097Fe57bF712857'
     winning_probability_in_promiles: 300
     dependencies:
       randomness:
