@@ -5,7 +5,7 @@ from scripts.helper import get_config, get_deployed_lottery_address
 
 
 def buy_coupon_and_try_to_win():
-    working_network, account, vrf_coordinator, keyhash, subscription_id = get_config()
+    working_network, account, _, _, _ = get_config()
 
     lottery_contract = Contract(get_deployed_lottery_address())
     if lottery_contract.lottery_state() == 1:
