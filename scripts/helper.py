@@ -7,7 +7,7 @@ def get_config():
     vrf_coordinator = config['contract'][working_network]['dependencies']['randomness']['vrf_coordinator']
     keyhash = config['contract'][working_network]['dependencies']['randomness']['keyhash']
     subscription_id = config['contract'][working_network]['dependencies']['randomness']['subscription_id']
-    return network, account, vrf_coordinator, keyhash, subscription_id
+    return working_network, account, vrf_coordinator, keyhash, subscription_id
 
 
 def get_deployed_lottery_address():

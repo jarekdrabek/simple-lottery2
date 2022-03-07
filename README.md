@@ -30,8 +30,14 @@ Installing project dependencies:
 pip install -r requirements.txt
 ```
 
+
+Use my Infura project id to interact with Rinkeby network
+```
+export WEB3_INFURA_PROJECT_ID=3b60db32abff40358b27faee00f6cc83
+```
 In order to interact with Rinkeby Ethereum testnet you need to create Rinkeby account 
 (you need to provide private key to your Metamask account - PLEASE DON'T USE THE ONE WITH REAL MONEY ON IT!)
+
 ```
 brownie accounts new rinkeby-account1 
 ```
@@ -52,7 +58,7 @@ brownie test
 ```
 
 ### How to deploy you own version of Lottery and take part in it:
-1. In order to use [chainlink VRF v2](https://docs.chain.link/docs/get-a-random-number/)  to first [create and fund a chainlink subscription](https://docs.chain.link/docs/get-a-random-number/#create-and-fund-a-subscription).
+1. In order to use [chainlink VRF v2](https://docs.chain.link/docs/get-a-random-number/)  first [create and fund a chainlink subscription](https://docs.chain.link/docs/get-a-random-number/#create-and-fund-a-subscription).
 After that you need to change **_subscription_id_** with your value.  
 
     ```
@@ -62,14 +68,10 @@ After that you need to change **_subscription_id_** with your value.
           randomness:
             subscription_id: 638
     ```
-2. Set the **_winning_probability_in_promiles_** property in `brownie-config.yaml` file. 
+2. Set the **_winning_probability_in_promiles_** property in `brownie-config.yaml` file with value between 1 and 999. 
 
 
 3. Deploying to Rinkeby Ethereum network.
-Use my Infura project id to deploy to Rinkeby network
-    ```
-    export WEB3_INFURA_PROJECT_ID=3b60db32abff40358b27faee00f6cc83
-    ```
     ```
     brownie run scripts/deploy.py --network rinkeby
     ```
