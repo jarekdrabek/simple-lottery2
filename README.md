@@ -20,14 +20,14 @@ Then this random number is [mod](https://en.wikipedia.org/wiki/Modulo_operation)
 ## Installation and running
 
 ### Requirements:
-you need to have `Python 3.9` and [brownie](https://eth-brownie.readthedocs.io/en/stable/install.html) installed
+you need to have `Python 3.9`, [brownie](https://eth-brownie.readthedocs.io/en/stable/install.html) and [ganache](https://github.com/trufflesuite/ganache) installed installed
 
 
 ### Prerequisuites
 
 Installing project dependencies:
 ```
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 
