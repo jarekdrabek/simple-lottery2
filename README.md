@@ -13,10 +13,6 @@ After that the lottery start over.
 
 ## How it works technically
 
-
-We collect the addresses that bought the coupon in an **couponBuyers** array. Every purchase is another 
-element in the array.  
-
 After a player bought the lottery coupon the random number is draw using [chainlink VRF v2](https://docs.chain.link/docs/get-a-random-number/). 
 Then this random number is [mod](https://en.wikipedia.org/wiki/Modulo_operation) by 1000. Then, if the result is lower then **_winning_probability_in_promiles_** property in `brownie-config.yaml` file, the player is the winner and is given the whole winning pool. Otherwise he is a looser and his money is added to the winning pool.   
 
