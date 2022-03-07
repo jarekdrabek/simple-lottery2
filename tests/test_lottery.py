@@ -12,13 +12,13 @@ def test_lottery_workflow():
     lottery_contract, vrf_coordinator = __deploy_and_get_lottery_contract_and_dependencies(first_player_account)
 
     #Act
-    tx = lottery_contract.buyCouponAnTryToWin({"from": first_player_account, "value": Web3.toWei(0.001, 'ether')})
+    tx = lottery_contract.buyCouponAndTryToWin({"from": first_player_account, "value": Web3.toWei(0.001, 'ether')})
     __fullfill_lottery_vrf_coordinator_with_given_random_result2(tx.return_value, lottery_contract, vrf_coordinator, 14)
 
-    tx = lottery_contract.buyCouponAnTryToWin({"from": second_player_account, "value": Web3.toWei(0.001, 'ether')})
+    tx = lottery_contract.buyCouponAndTryToWin({"from": second_player_account, "value": Web3.toWei(0.001, 'ether')})
     __fullfill_lottery_vrf_coordinator_with_given_random_result2(tx.return_value, lottery_contract, vrf_coordinator, 90)
 
-    tx = lottery_contract.buyCouponAnTryToWin({"from": third_player_account, "value": Web3.toWei(0.001, 'ether')})
+    tx = lottery_contract.buyCouponAndTryToWin({"from": third_player_account, "value": Web3.toWei(0.001, 'ether')})
     __fullfill_lottery_vrf_coordinator_with_given_random_result2(tx.return_value, lottery_contract, vrf_coordinator, 4)
 
     #Assert
@@ -35,9 +35,9 @@ def test_cannot_buy_another_coupon_whe_the_previous_one_was_not_resolved():
     lottery_contract, vrf_coordinator = __deploy_and_get_lottery_contract_and_dependencies(first_player_account)
 
     # Act and Assert
-    lottery_contract.buyCouponAnTryToWin({"from": first_player_account, "value": Web3.toWei(0.001, 'ether')})
+    lottery_contract.buyCouponAndTryToWin({"from": first_player_account, "value": Web3.toWei(0.001, 'ether')})
     with pytest.raises(VirtualMachineError):
-        lottery_contract.buyCouponAnTryToWin({"from": second_player_account, "value": Web3.toWei(0.001, 'ether')})
+        lottery_contract.buyCouponAndTryToWin({"from": second_player_account, "value": Web3.toWei(0.001, 'ether')})
 
 
 def test_you_can_start_new_lottery_when_the_previous_one_was_finished():
@@ -47,10 +47,10 @@ def test_you_can_start_new_lottery_when_the_previous_one_was_finished():
     lottery_contract, vrf_coordinator = __deploy_and_get_lottery_contract_and_dependencies(first_player_account)
 
     # Act
-    tx = lottery_contract.buyCouponAnTryToWin({"from": first_player_account, "value": Web3.toWei(0.001, 'ether')})
+    tx = lottery_contract.buyCouponAndTryToWin({"from": first_player_account, "value": Web3.toWei(0.001, 'ether')})
     __fullfill_lottery_vrf_coordinator_with_given_random_result2(tx.return_value, lottery_contract, vrf_coordinator, 4)
 
-    tx = lottery_contract.buyCouponAnTryToWin({"from": second_player_account, "value": Web3.toWei(0.001, 'ether')})
+    tx = lottery_contract.buyCouponAndTryToWin({"from": second_player_account, "value": Web3.toWei(0.001, 'ether')})
     __fullfill_lottery_vrf_coordinator_with_given_random_result2(tx.return_value, lottery_contract, vrf_coordinator, 90)
 
     #Assert
@@ -65,7 +65,7 @@ def test_coupon_for_more_then_one_million_gwei():
 
     # Act and Assert
     with pytest.raises(VirtualMachineError):
-        testing_contract.buyCouponAnTryToWin(
+        testing_contract.buyCouponAndTryToWin(
             {"from": first_player_account, "value": Web3.toWei(0.001, 'ether') + 1}
         )
 
@@ -77,7 +77,7 @@ def test_coupon_for_less_then_one_million_gwei():
 
     # Act and Assert
     with pytest.raises(VirtualMachineError):
-        testing_contract.buyCouponAnTryToWin({"from": first_player_account, "value": Web3.toWei(0.001, 'ether') - 1})
+        testing_contract.buyCouponAndTryToWin({"from": first_player_account, "value": Web3.toWei(0.001, 'ether') - 1})
 
 
 def __deploy_and_get_lottery_contract_and_dependencies(deploying_account):

@@ -41,7 +41,7 @@ contract Lottery is VRFConsumerBaseV2 {
         _;
     }
 
-    function buyCouponAnTryToWin() public payable isCouponPrice returns(uint256) {
+    function buyCouponAndTryToWin() public payable isCouponPrice returns(uint256) {
         require(lottery_state == LOTTERY_STATE.OPEN);
         lottery_state = LOTTERY_STATE.IN_PROGRESS;
         return tryToWin();
